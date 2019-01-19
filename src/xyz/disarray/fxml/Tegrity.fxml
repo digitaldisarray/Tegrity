@@ -6,24 +6,26 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="625.0" prefWidth="950.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1">
+<AnchorPane prefHeight="625.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xyz.disarray.fxml.controllers.TegrityController">
    <children>
-      <Button layoutX="545.0" layoutY="572.0" mnemonicParsing="false" text="Run Scan" />
-      <MenuBar layoutX="2.0" prefHeight="29.0" prefWidth="826.0">
+      <Button fx:id="runButton" layoutX="793.0" layoutY="590.0" mnemonicParsing="false" onAction="#run" prefHeight="26.0" prefWidth="130.0" text="Run Scan" />
+      <MenuBar layoutX="2.0" prefHeight="29.0" prefWidth="948.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
+                  <MenuItem fx:id="importButton" mnemonicParsing="false" text="Import..." />
+                  <MenuItem fx:id="exportButton" mnemonicParsing="false" text="Export..." />
               <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" text="Clear Result Table" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -33,21 +35,27 @@
           </Menu>
         </menus>
       </MenuBar>
-      <ProgressBar layoutX="11.0" layoutY="575.0" prefHeight="20.0" prefWidth="484.0" progress="0.0" />
-      <TableView layoutX="11.0" layoutY="73.0" prefHeight="480.0" prefWidth="450.0">
+      <ProgressBar fx:id="progressBar" layoutX="11.0" layoutY="593.0" prefHeight="20.0" prefWidth="450.0" progress="0.0" />
+      <TableView fx:id="fileTable" layoutX="11.0" layoutY="73.0" prefHeight="480.0" prefWidth="450.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn prefWidth="120.0" text="Name" />
+          <TableColumn prefWidth="100.0" text="Hash" />
+            <TableColumn prefWidth="230.0" text="Location" />
         </columns>
       </TableView>
-      <Button layoutX="33.0" layoutY="37.0" mnemonicParsing="false" text="Add File(s)..." />
-      <Label layoutX="14.0" layoutY="559.0" text="Progress:  0/0" />
-      <TableView layoutX="473.0" layoutY="72.0" prefHeight="480.0" prefWidth="450.0">
+      <Button fx:id="addFileButton" layoutX="14.0" layoutY="36.0" mnemonicParsing="false" onAction="#addFile" text="Add File(s)..." />
+      <Label fx:id="progressLabel" layoutX="11.0" layoutY="559.0" text="Progress:  0/0" />
+      <TableView fx:id="resultTabe" layoutX="473.0" layoutY="72.0" prefHeight="480.0" prefWidth="450.0">
          <columns>
-            <TableColumn prefWidth="75.0" text="C1" />
-            <TableColumn prefWidth="75.0" text="C2" />
+            <TableColumn prefWidth="75.0" text="Name" />
+            <TableColumn prefWidth="100.0" text="Old Hash" />
+            <TableColumn prefWidth="100.0" text="New Hash" />
+            <TableColumn prefWidth="175.0" text="Location" />
          </columns>
       </TableView>
-      <Label layoutX="11.0" layoutY="595.0" text="Current File:" />
+      <Label fx:id="currentFileLabel" layoutX="11.0" layoutY="575.0" text="Current File:" />
+      <Label layoutX="792.0" layoutY="567.0" text="Threads:" />
+      <Spinner fx:id="threadSpinner" layoutX="858.0" layoutY="562.0" prefHeight="26.0" prefWidth="65.0" />
+      <Button fx:id="retargetButton" layoutX="125.0" layoutY="36.0" mnemonicParsing="false" onAction="#retarget" text="Retarget Selected..." />
    </children>
 </AnchorPane>

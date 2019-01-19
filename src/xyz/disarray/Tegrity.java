@@ -11,7 +11,7 @@ public class Tegrity extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Pane pane = (Pane) FXMLLoader.load(Tegrity.class.getResource("Tegrity.fxml"));
+			Pane pane = (Pane) FXMLLoader.load(getClass().getClassLoader().getResource("./xyz/disarray/fxml/Tegrity.fxml"));
 			primaryStage.setTitle("Tegrity");
 			primaryStage.setScene(new Scene(pane));
 			primaryStage.show();
