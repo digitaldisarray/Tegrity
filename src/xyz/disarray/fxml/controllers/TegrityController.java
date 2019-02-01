@@ -7,6 +7,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -58,6 +60,7 @@ public class TegrityController {
 	FileChooser chooser;
 	java.util.List<File> filesToAdd;
 	ArrayList<String> hashes;
+	private final ObservableList<InputTableItem> inputData = FXCollections.observableArrayList();
 	MessageDigest digest;
 
 	@FXML
@@ -87,17 +90,17 @@ public class TegrityController {
 			}
 		}
 
-		// Debug print
-		for(String hash : hashes) {
-			System.out.println(hash);
+		// Convert the string lists to input table item
+		for (int i = 0; i < hashes.size(); i++) {
+			inputData.add(new InputTableItem(filesToAdd.get(i).getName(), hashes.get(i), "", filesToAdd.get(i).getAbsolutePath()));
+			System.out.println(hashes.get(i));
 		}
 		
 		// Check that file(s) aren't already on table
-		
 
 		// Add file(s) to table
+		fileTable.setItems(inputData);
 		
-
 		// Cleanup
 		chooser = null;
 	}

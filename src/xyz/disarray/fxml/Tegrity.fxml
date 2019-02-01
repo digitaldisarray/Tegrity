@@ -39,8 +39,9 @@
       <TableView fx:id="fileTable" layoutX="11.0" layoutY="73.0" prefHeight="480.0" prefWidth="450.0">
         <columns>
           <TableColumn prefWidth="120.0" text="Name" />
-          <TableColumn prefWidth="100.0" text="Hash" />
-            <TableColumn prefWidth="230.0" text="Location" />
+          <TableColumn prefWidth="84.0" text="SHA Hash" />
+            <TableColumn prefWidth="82.0" text="AES Hash" />
+            <TableColumn prefWidth="165.0" text="Location" />
         </columns>
       </TableView>
       <Button fx:id="addFileButton" layoutX="14.0" layoutY="36.0" mnemonicParsing="false" onAction="#addFile" text="Add File(s)..." />
