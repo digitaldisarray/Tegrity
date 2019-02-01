@@ -17,6 +17,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.TableView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import xyz.disarray.InputTableItem;
 
 public class TegrityController {
 
@@ -33,7 +34,7 @@ public class TegrityController {
 	private ProgressBar progressBar;
 
 	@FXML
-	private TableView<?> fileTable;
+	private TableView<InputTableItem> fileTable;
 
 	@FXML
 	private Button addFileButton;
@@ -45,7 +46,7 @@ public class TegrityController {
 	private Label progressLabel;
 
 	@FXML
-	private TableView<?> resultTabe;
+	private TableView<String> resultTabe;
 
 	@FXML
 	private Label currentFileLabel;
@@ -86,9 +87,16 @@ public class TegrityController {
 			}
 		}
 
+		// Debug print
+		for(String hash : hashes) {
+			System.out.println(hash);
+		}
+		
 		// Check that file(s) aren't already on table
+		
 
 		// Add file(s) to table
+		
 
 		// Cleanup
 		chooser = null;
