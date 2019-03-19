@@ -1,4 +1,4 @@
-package xyz.disarray.fxml.controllers;
+package xyz.disarray.gui.fxml.controllers;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,7 +19,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.TableView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
-import xyz.disarray.InputTableItem;
+import xyz.disarray.gui.InputTableItem;
 
 public class TegrityController {
 
@@ -97,7 +97,8 @@ public class TegrityController {
 		}
 		
 		// Check that file(s) aren't already on table
-
+		
+		
 		// Add file(s) to table
 		fileTable.setItems(inputData);
 		

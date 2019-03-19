@@ -21,6 +21,12 @@ public class Tegrity extends Application {
 	}
 	
 	public static void main(String[] args) {
-		launch(args);
+		// Run the gui
+		// launch(args);
+		
+		// Launch the console version
+		
+		
+		
 	}
 }

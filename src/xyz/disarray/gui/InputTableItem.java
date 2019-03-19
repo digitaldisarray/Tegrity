@@ -1,4 +1,4 @@
-package xyz.disarray;
+package xyz.disarray.gui;
 
 import javafx.beans.property.SimpleStringProperty;
 
