@@ -113,8 +113,8 @@ public class TegrityController {
 
 	@FXML
 	void run(ActionEvent event) {
-		// Check we have files to scan
-
+		// Check we have files to scan		
+		
 		// Check we have at least 1 thread
 
 		// Check we don't have too many threads
