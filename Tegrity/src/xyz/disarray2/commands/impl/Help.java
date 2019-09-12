@@ -10,10 +10,10 @@ public class Help extends Command {
 
 	public void run() {
 		System.out.println("Commands: ");
-		for(Command c : Launcher.TEGRITY.getCommandManager().getCommands()) {
+		for (Command c : Launcher.TEGRITY.getCommandManager().getCommands()) {
 			System.out.println(c.toString());
 		}
 		System.out.println();
 	}
-	
+
 }

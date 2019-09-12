@@ -71,14 +71,13 @@ public class FileAdding extends JPanel implements DropTargetListener, Runnable {
 		try {
 			e.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE);
 			List list = (List) e.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
-			
-			
-			for(int i = 0; i < list.size(); i++) {
+
+			for (int i = 0; i < list.size(); i++) {
 				// Add (File) list.get(i); to the parent file list
 			}
 
 		} catch (Exception ex) {
-			
+
 		}
 	}
 
