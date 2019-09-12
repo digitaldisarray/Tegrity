@@ -7,7 +7,6 @@ public class Tegrity implements Runnable {
 	private void command(String input) {
 		input = input.toLowerCase();
 		
-		
 		if(input.equals("help")) {
 			System.out.println("Commands:\n"
 					+ "help - Display a list of commands\n"
