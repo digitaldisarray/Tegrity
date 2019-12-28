@@ -6,6 +6,7 @@ import xyz.disarray2.commands.CommandManager;
 
 public class Tegrity implements Runnable {
 
+	private Database db;
 	private CommandManager commandManager;
 	private Scanner in;
 
@@ -33,6 +34,17 @@ public class Tegrity implements Runnable {
 
 	public CommandManager getCommandManager() {
 		return commandManager;
+	}
+	
+	public boolean hasDb() {
+		if(db.equals(null))
+			return false;
+		else
+			return true;
+	}
+	
+	public void setDb(Database db) {
+		
 	}
 
 }
