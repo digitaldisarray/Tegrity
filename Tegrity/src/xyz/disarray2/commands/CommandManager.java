@@ -3,7 +3,7 @@ package xyz.disarray2.commands;
 import java.util.ArrayList;
 
 import xyz.disarray2.commands.impl.Command;
-import xyz.disarray2.commands.impl.FileAdder;
+import xyz.disarray2.commands.impl.GUI;
 import xyz.disarray2.commands.impl.Help;
 import xyz.disarray2.commands.impl.Load;
 import xyz.disarray2.commands.impl.Stop;
@@ -15,7 +15,7 @@ public class CommandManager {
 		// Init all commands here
 		commands.add(new Help("help", "Displays a list of commands"));
 		commands.add(new Load("load <path>", "Loads a database from disk"));
-		commands.add(new FileAdder("gui", "Launches the database editor gui"));
+		commands.add(new GUI("gui", "Launches the database editor gui"));
 		commands.add(new Stop("stop", "Stops Tegrity"));
 	}
 

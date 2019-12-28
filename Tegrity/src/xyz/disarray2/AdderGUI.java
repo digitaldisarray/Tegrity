@@ -1,12 +1,14 @@
 package xyz.disarray2;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
@@ -24,9 +26,6 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import org.json.simple.JSONObject;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class AdderGUI extends JPanel implements Runnable {
 
@@ -65,7 +64,12 @@ public class AdderGUI extends JPanel implements Runnable {
 					dbObj.put(f.getAbsolutePath(), fileObj);
 				}
 				
-				System.out.println(dbObj.toString());
+				try (FileWriter file = new FileWriter(Launcher.TEGRITY.getDb().getPath())) {
+		            file.write(dbObj.toJSONString());
+		            file.flush();
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
 				
 			}
 		});

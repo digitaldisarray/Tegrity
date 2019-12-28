@@ -21,5 +21,9 @@ public class Database {
 		else
 			return true;
 	}
+	
+	public String getPath() {
+		return database.getAbsolutePath();
+	}
 
 }

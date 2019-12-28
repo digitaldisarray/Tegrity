@@ -43,17 +43,14 @@ public class Tegrity implements Runnable {
 		return commandManager;
 	}
 
-	public boolean hasDb() {
-		if (db == null)
-			return false;
-		else
-			return true;
-	}
-
 	public void setDb(Database db) {
 		this.db = db;
 	}
 
+	public Database getDb() {
+		return db;
+	}
+	
 	public void stop() {
 		running = false;
 	}
