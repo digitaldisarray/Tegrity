@@ -14,6 +14,7 @@ public class Database {
 	 */
 	public boolean load(String path) {
 		database = new File(path);
+		System.out.println(database.getAbsolutePath());
 
 		if (!database.exists())
 			return false;

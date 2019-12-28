@@ -18,7 +18,8 @@ public class Tegrity implements Runnable {
 		running = true;
 		commandManager = new CommandManager();
 		in = new Scanner(System.in);
-
+		System.out.println("Tegrity - v" + Launcher.VERSION);
+		
 		// Loop
 		String input;
 		while (running) {
@@ -26,7 +27,8 @@ public class Tegrity implements Runnable {
 			input = in.nextLine();
 
 			try {
-				commandManager.runCommand(input.substring(0, input.indexOf(' ')), input.substring(input.indexOf(' ') + 1, input.length()).split(" "));
+				commandManager.runCommand(input.substring(0, input.indexOf(' ')),
+						input.substring(input.indexOf(' ') + 1, input.length()).split(" "));
 			} catch (StringIndexOutOfBoundsException e) {
 				// TODO: Get good at programming :/
 				commandManager.runCommand(input.substring(0, input.length()), null);
@@ -40,16 +42,20 @@ public class Tegrity implements Runnable {
 	public CommandManager getCommandManager() {
 		return commandManager;
 	}
-	
+
 	public boolean hasDb() {
-		if(db == null)
+		if (db == null)
 			return false;
 		else
 			return true;
 	}
-	
+
 	public void setDb(Database db) {
-		
+		this.db = db;
+	}
+
+	public void stop() {
+		running = false;
 	}
 
 }

@@ -10,10 +10,11 @@ public class FileAdder extends Command {
 
 	public void run(String[] args) {
 		// TODO: Test if a database is selected to modify
-		if(!Launcher.TEGRITY.hasDb()) {
+		// TODO: Removed for debug purposes
+		/*if(!Launcher.TEGRITY.hasDb()) {
 			System.out.println("Error - Please select or create a database first.");
 			return;
-		}
+		}*/
 		
 		// TODO: Turn the adder into editor and eventually standalone app
 		
