@@ -8,7 +8,7 @@ public class Help extends Command {
 		super(name, description);
 	}
 
-	public void run() {
+	public void run(String[] args) {
 		System.out.println("Commands: ");
 		for (Command c : Launcher.TEGRITY.getCommandManager().getCommands()) {
 			System.out.println(c.toString());

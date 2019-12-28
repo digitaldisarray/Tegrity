@@ -25,7 +25,12 @@ public class Tegrity implements Runnable {
 			System.out.print("> ");
 			input = in.nextLine();
 
-			commandManager.runCommand(input, null);
+			try {
+				commandManager.runCommand(input.substring(0, input.indexOf(' ')), input.substring(input.indexOf(' ') + 1, input.length()).split(" "));
+			} catch (StringIndexOutOfBoundsException e) {
+				// TODO: Get good at programming :/
+				commandManager.runCommand(input.substring(0, input.length()), null);
+			}
 		}
 
 		in.close();
@@ -37,7 +42,7 @@ public class Tegrity implements Runnable {
 	}
 	
 	public boolean hasDb() {
-		if(db.equals(null))
+		if(db == null)
 			return false;
 		else
 			return true;

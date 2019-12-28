@@ -4,8 +4,6 @@ import xyz.disarray2.Database;
 import xyz.disarray2.Launcher;
 
 public class Load extends Command {
-
-	public final boolean HAS_ARGS = true;
 	
 	public Load(String name, String description) {
 		super(name, description);
@@ -18,6 +16,8 @@ public class Load extends Command {
 		
 		if(loaded.load(args[0])) {
 			Launcher.TEGRITY.setDb(loaded);
+		} else {
+			System.out.println("Failed to load database. File not found.");
 		}
 	}
 

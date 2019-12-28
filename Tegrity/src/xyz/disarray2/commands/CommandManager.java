@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import xyz.disarray2.commands.impl.Command;
 import xyz.disarray2.commands.impl.FileAdder;
 import xyz.disarray2.commands.impl.Help;
+import xyz.disarray2.commands.impl.Load;
 
 public class CommandManager {
 	private ArrayList<Command> commands = new ArrayList<>();
@@ -12,7 +13,8 @@ public class CommandManager {
 	public CommandManager() {
 		// Init all commands here
 		commands.add(new Help("help", "Displays a list of commands"));
-		commands.add(new FileAdder("addergui", "Opens the file adder gui"));
+		commands.add(new Load("load <path>", "Loads a database from disk"));
+		commands.add(new FileAdder("gui", "Launches the database editor gui"));
 	}
 
 	public ArrayList<Command> getCommands() {
@@ -20,15 +22,20 @@ public class CommandManager {
 	}
 
 	public void runCommand(String name, String[] args) {
+		/*
+		System.out.println("Name: " + name);
+		System.out.print("Args: ");
+		for(String s : args) {
+			System.out.print(s + " ");
+		}
+		System.out.println();
+		*/
+		
 		boolean hasRun = false;
 		for (Command c : commands) {
-			if (c.getName().equalsIgnoreCase(name)) {
+			if (c.getName().startsWith(name.toLowerCase())) {
+				c.run(args);
 				hasRun = true;
-
-				if (c.HAS_ARGS)
-					c.run(args);
-				else
-					c.run();
 			}
 		}
 

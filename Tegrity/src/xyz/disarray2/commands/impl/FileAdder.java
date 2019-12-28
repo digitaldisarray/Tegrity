@@ -8,7 +8,7 @@ public class FileAdder extends Command {
 		super(name, description);
 	}
 
-	public void run() {
+	public void run(String[] args) {
 		// TODO: Test if a database is selected to modify
 		if(!Launcher.TEGRITY.hasDb()) {
 			System.out.println("Error - Please select or create a database first.");
