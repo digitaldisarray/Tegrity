@@ -1,8 +1,10 @@
-package xyz.disarray2;
+package xyz.disarray2.tegrity;
 
 import java.util.Scanner;
 
+import xyz.disarray2.Launcher;
 import xyz.disarray2.commands.CommandManager;
+import xyz.disarray2.tegrity.db.Database;
 
 public class Tegrity implements Runnable {
 
@@ -41,10 +43,6 @@ public class Tegrity implements Runnable {
 
 	public CommandManager getCommandManager() {
 		return commandManager;
-	}
-
-	public void setDb(Database db) {
-		this.db = db;
 	}
 
 	public Database getDb() {

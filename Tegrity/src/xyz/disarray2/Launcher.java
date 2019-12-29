@@ -1,5 +1,7 @@
 package xyz.disarray2;
 
+import xyz.disarray2.tegrity.Tegrity;
+
 public class Launcher {
 	public static Tegrity TEGRITY;
 	public final static double VERSION = 0.1;
