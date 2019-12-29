@@ -8,9 +8,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -25,23 +27,40 @@ import javax.swing.TransferHandler;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
-public class AdderGUI extends JPanel implements Runnable {
+public class TegrityGUI extends JPanel implements Runnable {
 
 	private JList<File> list = new JList<File>();
-	
+
 	/**
 	 * Create the panel.
 	 */
-	public AdderGUI() {
+	public TegrityGUI() {
 		setLayout(new BorderLayout(0, 0));
 
-		// Read from the database and add to the list
+		// Read from the database and add to the list if possible
+		try {
+			JSONParser parser = new JSONParser();
+			Object obj = parser.parse(new FileReader(Launcher.TEGRITY.getDb().getPath()));
+			
+			DefaultListModel<File> listModel = new DefaultListModel<File>();
+			JSONArray jsonFile = (JSONArray)obj;
+			for(Object o : jsonFile.toArray()) {
+				JSONObject jo = (JSONObject) o;
+				listModel.addElement(new File((String) jo.get("path")));
+			}
+			list.setModel(listModel);
+		} catch (IOException | ParseException e1) {
+			
+		}
 		
 		list.setDragEnabled(true);
 		list.setTransferHandler(new FileListTransferHandler(list));
-		
+
 		JLabel lblDragFilesTo = new JLabel("Drag files to add them into the DB:");
 		lblDragFilesTo.setVerticalAlignment(SwingConstants.TOP);
 		add(lblDragFilesTo, BorderLayout.NORTH);
@@ -53,24 +72,26 @@ public class AdderGUI extends JPanel implements Runnable {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO: Save changes to DB
-				JSONObject dbObj = new JSONObject();
-				for(int i = 0; i < list.getModel().getSize(); i++) {
+				JSONArray dbArr = new JSONArray();
+				for (int i = 0; i < list.getModel().getSize(); i++) {
 					File f = list.getModel().getElementAt(i);
 					JSONObject fileObj = new JSONObject();
+					fileObj.put("path", f.getAbsolutePath());
 					fileObj.put("hash", f.hashCode());
-					
+
 					// TODO: Make this somehow support duplicate file names or file hashes
-					// Absolute path works for this but idealy we would have the file hash as the key for the json object
-					dbObj.put(f.getAbsolutePath(), fileObj);
+					// Absolute path works for this but idealy we would have the file hash as the
+					// key for the json object
+					dbArr.add(fileObj);
 				}
-				
+
 				try (FileWriter file = new FileWriter(Launcher.TEGRITY.getDb().getPath())) {
-		            file.write(dbObj.toJSONString());
-		            file.flush();
-		        } catch (IOException e) {
-		            e.printStackTrace();
-		        }
-				
+					file.write(dbArr.toJSONString());
+					file.flush();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
 			}
 		});
 		add(btnNewButton, BorderLayout.SOUTH);
@@ -95,7 +116,7 @@ public class AdderGUI extends JPanel implements Runnable {
 		});
 
 		frame.setResizable(true);
-		frame.getContentPane().add(new AdderGUI());
+		frame.getContentPane().add(new TegrityGUI());
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
@@ -129,10 +150,10 @@ class FileListTransferHandler extends TransferHandler {
 
 			DefaultListModel<File> listModel = new DefaultListModel<File>();
 			// Transfer over previous elements
-			for(int i = 0; i < list.getModel().getSize(); i++) {
+			for (int i = 0; i < list.getModel().getSize(); i++) {
 				listModel.addElement(list.getModel().getElementAt(i));
 			}
-			
+
 			for (Object item : data) {
 				File file = (File) item;
 				listModel.addElement(file);

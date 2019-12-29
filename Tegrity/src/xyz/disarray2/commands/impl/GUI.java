@@ -1,6 +1,6 @@
 package xyz.disarray2.commands.impl;
 
-import xyz.disarray2.AdderGUI;
+import xyz.disarray2.TegrityGUI;
 import xyz.disarray2.Launcher;
 
 public class GUI extends Command {
@@ -15,6 +15,6 @@ public class GUI extends Command {
 		}
 		
 		// TODO: Turn the adder into editor and eventually standalone app
-		new AdderGUI().run();
+		new TegrityGUI().run();
 	}
 }
