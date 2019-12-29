@@ -1,5 +1,6 @@
 package xyz.disarray2.tegrity;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.datatransfer.DataFlavor;
@@ -11,11 +12,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -34,11 +31,6 @@ import javax.swing.TransferHandler;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.LineBorder;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import xyz.disarray2.Launcher;
 
@@ -91,21 +83,52 @@ public class TegrityGUI extends JPanel implements Runnable {
 
 		list.setDragEnabled(true);
 		list.setTransferHandler(new FileListTransferHandler(list));
+		
+		JButton btnCheck = new JButton("Check");
+		btnCheck.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO: Check file integrity
+				/*
+				 * for each file,
+				 *  - compare hash of db to disk
+				 *  - if equal
+				 *    - highlight green
+				 *  - else
+				 *    - highlight red
+				 *    
+				 *  - output stats & info to console?
+				 */
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout
-				.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup().addGap(10)
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addGroup(groupLayout.createSequentialGroup()
-												.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 280,
-														Short.MAX_VALUE)
-												.addContainerGap())
-										.addComponent(lblDragFilesTo).addComponent(saveButton))));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addGap(11).addComponent(lblDragFilesTo)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(saveButton).addGap(11)));
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(10)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+							.addContainerGap())
+						.addComponent(lblDragFilesTo)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(saveButton)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnCheck)
+							.addContainerGap())))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(11)
+					.addComponent(lblDragFilesTo)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(saveButton)
+						.addComponent(btnCheck))
+					.addGap(11))
+		);
 		setLayout(groupLayout);
 
 	}

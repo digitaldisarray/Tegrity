@@ -18,6 +18,7 @@ public class Tegrity implements Runnable {
 	public void run() {
 		// Setup
 		running = true;
+		db = new Database();
 		commandManager = new CommandManager();
 		in = new Scanner(System.in);
 		System.out.println("Tegrity - v" + Launcher.VERSION);
