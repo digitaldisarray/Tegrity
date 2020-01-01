@@ -85,6 +85,7 @@ public class TegrityGUI extends JPanel implements Runnable {
 		list.setTransferHandler(new FileListTransferHandler(list));
 		
 		JButton btnCheck = new JButton("Check");
+		btnCheck.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnCheck.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO: Check file integrity
@@ -122,7 +123,7 @@ public class TegrityGUI extends JPanel implements Runnable {
 					.addGap(11)
 					.addComponent(lblDragFilesTo)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(saveButton)

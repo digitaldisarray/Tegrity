@@ -1,4 +1,4 @@
-package xyz.disarray.commands.impl;
+package xyz.disarray.tegrity.commands.impl;
 
 import xyz.disarray.Launcher;
 

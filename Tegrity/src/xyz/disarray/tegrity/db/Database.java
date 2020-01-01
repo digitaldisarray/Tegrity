@@ -11,7 +11,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import xyz.disarray.tegrity.HashingUtils;
+import xyz.disarray.tegrity.util.HashingUtils;
 
 public class Database {
 

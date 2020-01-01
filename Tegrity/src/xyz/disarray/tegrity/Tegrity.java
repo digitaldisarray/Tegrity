@@ -3,7 +3,7 @@ package xyz.disarray.tegrity;
 import java.util.Scanner;
 
 import xyz.disarray.Launcher;
-import xyz.disarray.commands.CommandManager;
+import xyz.disarray.tegrity.commands.CommandManager;
 import xyz.disarray.tegrity.db.Database;
 
 public class Tegrity implements Runnable {
