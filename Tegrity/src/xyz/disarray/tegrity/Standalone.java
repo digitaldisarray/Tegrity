@@ -71,7 +71,7 @@ public class Standalone extends JPanel {
 							.addComponent(chckbxHideChanged, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(chckbxHideUnchanged)))
-					.addGap(93))
+					.addGap(11))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -87,16 +87,17 @@ public class Standalone extends JPanel {
 						.addComponent(chckbxHideUnchanged)
 						.addComponent(chckbxHideChanged, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnCompare)
 						.addComponent(btnOverwrite, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnExportSelected, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-					.addGap(10))
+					.addGap(11))
 		);
 		
 		JList list = new JList();
+		list.setFont(new Font("DialogInput", Font.PLAIN, 12));
 		scrollPane.setViewportView(list);
 		setLayout(groupLayout);
 
