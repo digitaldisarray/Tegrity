@@ -1,12 +1,12 @@
-package xyz.disarray2.commands;
+package xyz.disarray.commands;
 
 import java.util.ArrayList;
 
-import xyz.disarray2.commands.impl.Command;
-import xyz.disarray2.commands.impl.GUI;
-import xyz.disarray2.commands.impl.Help;
-import xyz.disarray2.commands.impl.Load;
-import xyz.disarray2.commands.impl.Stop;
+import xyz.disarray.commands.impl.Command;
+import xyz.disarray.commands.impl.GUI;
+import xyz.disarray.commands.impl.Help;
+import xyz.disarray.commands.impl.Load;
+import xyz.disarray.commands.impl.Stop;
 
 public class CommandManager {
 	private ArrayList<Command> commands = new ArrayList<>();

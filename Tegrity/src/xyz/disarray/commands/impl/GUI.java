@@ -1,7 +1,7 @@
-package xyz.disarray2.commands.impl;
+package xyz.disarray.commands.impl;
 
-import xyz.disarray2.Launcher;
-import xyz.disarray2.tegrity.TegrityGUI;
+import xyz.disarray.Launcher;
+import xyz.disarray.tegrity.TegrityGUI;
 
 public class GUI extends Command {
 	public GUI(String name, String description) {

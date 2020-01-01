@@ -1,10 +1,10 @@
-package xyz.disarray2.tegrity;
+package xyz.disarray.tegrity;
 
 import java.util.Scanner;
 
-import xyz.disarray2.Launcher;
-import xyz.disarray2.commands.CommandManager;
-import xyz.disarray2.tegrity.db.Database;
+import xyz.disarray.Launcher;
+import xyz.disarray.commands.CommandManager;
+import xyz.disarray.tegrity.db.Database;
 
 public class Tegrity implements Runnable {
 

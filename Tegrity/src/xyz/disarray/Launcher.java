@@ -1,6 +1,6 @@
-package xyz.disarray2;
+package xyz.disarray;
 
-import xyz.disarray2.tegrity.Tegrity;
+import xyz.disarray.tegrity.Tegrity;
 
 public class Launcher {
 	public static Tegrity TEGRITY;

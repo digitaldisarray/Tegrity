@@ -1,4 +1,4 @@
-package xyz.disarray2.tegrity;
+package xyz.disarray.tegrity;
 
 import java.io.File;
 import java.io.FileInputStream;

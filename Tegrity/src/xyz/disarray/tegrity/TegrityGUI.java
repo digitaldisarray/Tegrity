@@ -1,4 +1,4 @@
-package xyz.disarray2.tegrity;
+package xyz.disarray.tegrity;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -32,7 +32,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.LineBorder;
 
-import xyz.disarray2.Launcher;
+import xyz.disarray.Launcher;
 
 public class TegrityGUI extends JPanel implements Runnable {
 

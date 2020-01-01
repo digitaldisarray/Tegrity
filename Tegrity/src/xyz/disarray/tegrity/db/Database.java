@@ -1,4 +1,4 @@
-package xyz.disarray2.tegrity.db;
+package xyz.disarray.tegrity.db;
 
 import java.io.File;
 import java.io.FileReader;
@@ -11,7 +11,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import xyz.disarray2.tegrity.HashingUtils;
+import xyz.disarray.tegrity.HashingUtils;
 
 public class Database {
 

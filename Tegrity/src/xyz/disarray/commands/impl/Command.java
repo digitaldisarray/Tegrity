@@ -1,4 +1,4 @@
-package xyz.disarray2.commands.impl;
+package xyz.disarray.commands.impl;
 
 public class Command {
 

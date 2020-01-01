@@ -1,4 +1,4 @@
-package xyz.disarray2.tegrity.db;
+package xyz.disarray.tegrity.db;
 
 public class DBFile {
 	private String path, md5, sha1;
