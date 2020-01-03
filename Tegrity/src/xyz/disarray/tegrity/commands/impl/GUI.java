@@ -1,7 +1,7 @@
 package xyz.disarray.tegrity.commands.impl;
 
 import xyz.disarray.Launcher;
-import xyz.disarray.tegrity.TegrityGUI;
+import xyz.disarray.tegrity.Standalone2;
 
 public class GUI extends Command {
 	public GUI(String name, String description) {
@@ -15,6 +15,6 @@ public class GUI extends Command {
 		}
 		
 		// TODO: Turn the adder into editor and eventually standalone app
-		new TegrityGUI().run();
+		new Standalone2().run();
 	}
 }
