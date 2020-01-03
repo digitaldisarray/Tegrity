@@ -2,20 +2,28 @@ package xyz.disarray.tegrity;
 
 import java.awt.FileDialog;
 import java.awt.Font;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.TransferHandler;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -53,6 +61,22 @@ public class Standalone3 implements Runnable {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setTitle("Tegrity - v" + Launcher.VERSION);
+
+		list.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// If delete is pressed
+				if (e.getKeyChar() == KeyEvent.VK_DELETE || e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+					if (list.getSelectedIndex() != -1) {
+						removeFromList(list.getSelectedIndex());
+					}
+				}
+			}
+		});
+
+		list.setDragEnabled(true);
+		list.setTransferHandler(new FileListTransferHandler(list));
 
 		JLabel lblCurrentDatabase = new JLabel("Current Database:");
 		lblCurrentDatabase.setFont(new Font("DialogInput", Font.PLAIN, 12));
@@ -78,7 +102,7 @@ public class Standalone3 implements Runnable {
 				int r = JOptionPane.showConfirmDialog(frame,
 						"Saving will overwrite all hashes in the database with the files current hash.\n" + "Continue?",
 						"Database Overwrite Confirmation", JOptionPane.YES_NO_OPTION);
-				if(r == 0)
+				if (r == 0)
 					db.save();
 			}
 		});
@@ -91,7 +115,7 @@ public class Standalone3 implements Runnable {
 		JCheckBox chckbxHideChanged = new JCheckBox("Hide Changed");
 		chckbxHideChanged.setEnabled(false);
 		chckbxHideChanged.setFont(new Font("DialogInput", Font.PLAIN, 12));
-		
+
 		JButton button = new JButton("...");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -108,7 +132,7 @@ public class Standalone3 implements Runnable {
 						db.load(f.getAbsolutePath());
 
 						list.setEnabled(true);
-						
+
 						// Read from the database and add to the list if possible
 						DefaultListModel<File> listModel = new DefaultListModel<File>();
 						for (String p : db.getFilePaths()) {
@@ -116,13 +140,13 @@ public class Standalone3 implements Runnable {
 							list.setModel(listModel);
 						}
 						lblDatabase.setText(f.getAbsolutePath());
-						
+
 						chckbxHideUnchanged.setEnabled(true);
 						chckbxHideChanged.setEnabled(true);
 						btnExportSelected.setEnabled(true);
 						btnOverwrite.setEnabled(true);
 						btnCompare.setEnabled(true);
-						
+
 					}
 				}
 
@@ -132,7 +156,6 @@ public class Standalone3 implements Runnable {
 
 		JScrollPane scrollPane = new JScrollPane();
 
-		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
 				groupLayout.createSequentialGroup().addContainerGap().addGroup(groupLayout
@@ -178,4 +201,67 @@ public class Standalone3 implements Runnable {
 		frame.getContentPane().setLayout(groupLayout);
 	}
 
+	private void removeFromList(int index) {
+		DefaultListModel<File> listModel = new DefaultListModel<File>();
+
+		for (int i = 0; i < list.getModel().getSize(); i++) {
+			if (i != index)
+				listModel.addElement(list.getModel().getElementAt(i));
+		}
+
+		list.setModel(listModel);
+
+		db.removeFile(index);
+	}
+
+	public void addFile(File file) {
+		db.addFile(file);
+	}
+
+}
+
+@SuppressWarnings("serial")
+class FileListTransferHandler extends TransferHandler {
+	private JList<File> list;
+
+	public FileListTransferHandler(JList<File> list) {
+		this.list = list;
+	}
+
+	public int getSourceActions(JComponent c) {
+		return COPY_OR_MOVE;
+	}
+
+	public boolean canImport(TransferSupport ts) {
+		return ts.isDataFlavorSupported(DataFlavor.javaFileListFlavor);
+	}
+
+	public boolean importData(TransferSupport ts) {
+		try {
+			@SuppressWarnings("rawtypes")
+			List data = (List) ts.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
+			if (data.size() < 1) {
+				return false;
+			}
+
+			DefaultListModel<File> listModel = new DefaultListModel<File>();
+			// Transfer over previous elements
+			for (int i = 0; i < list.getModel().getSize(); i++) {
+				listModel.addElement(list.getModel().getElementAt(i));
+			}
+
+			for (Object item : data) {
+				File file = (File) item;
+				listModel.addElement(file);
+				Launcher.TEGRITY.addFile(file);
+			}
+
+			list.setModel(listModel);
+			return true;
+		} catch (UnsupportedFlavorException e) {
+			return false;
+		} catch (IOException e) {
+			return false;
+		}
+	}
 }
