@@ -1,6 +1,5 @@
 package xyz.disarray.tegrity;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.datatransfer.DataFlavor;
