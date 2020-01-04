@@ -253,7 +253,7 @@ class FileListTransferHandler extends TransferHandler {
 			for (Object item : data) {
 				File file = (File) item;
 				listModel.addElement(file);
-				Launcher.TEGRITY.addFile(file);
+				Launcher.STANDALONE.addFile(file);
 			}
 
 			list.setModel(listModel);
