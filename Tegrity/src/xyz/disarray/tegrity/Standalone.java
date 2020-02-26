@@ -127,27 +127,33 @@ public class Standalone implements Runnable {
 
 				if (filename != null) {
 					File f = new File(fd.getFile());
-					if (f.exists()) {
-						db = new Database();
-						db.load(f.getAbsolutePath());
-
-						list.setEnabled(true);
-
-						// Read from the database and add to the list if possible
-						DefaultListModel<File> listModel = new DefaultListModel<File>();
-						for (String p : db.getFilePaths()) {
-							listModel.addElement(new File(p));
-							list.setModel(listModel);
+					if (!f.exists()) {
+						try {
+							f.createNewFile();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
-						lblDatabase.setText(f.getAbsolutePath());
-
-						chckbxHideUnchanged.setEnabled(true);
-						chckbxHideChanged.setEnabled(true);
-						btnExportSelected.setEnabled(true);
-						btnOverwrite.setEnabled(true);
-						btnCompare.setEnabled(true);
-
 					}
+					
+					db = new Database();
+					db.load(f.getAbsolutePath());
+
+					list.setEnabled(true);
+
+					// Read from the database and add to the list if possible
+					DefaultListModel<File> listModel = new DefaultListModel<File>();
+					for (String p : db.getFilePaths()) {
+						listModel.addElement(new File(p));
+						list.setModel(listModel);
+					}
+					lblDatabase.setText(f.getAbsolutePath());
+
+					chckbxHideUnchanged.setEnabled(true);
+					chckbxHideChanged.setEnabled(true);
+					btnExportSelected.setEnabled(true);
+					btnOverwrite.setEnabled(true);
+					btnCompare.setEnabled(true);
 				}
 
 			}
