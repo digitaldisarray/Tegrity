@@ -131,7 +131,6 @@ public class Standalone implements Runnable {
 						try {
 							f.createNewFile();
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
