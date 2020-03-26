@@ -123,16 +123,16 @@ public class Standalone implements Runnable {
 				fd.setDirectory("C:\\");
 				fd.setFile("*.json");
 				fd.setVisible(true);
-				String filename = fd.getFile();
+				String filePath = fd.getDirectory() + fd.getFile();
 
-				if (filename != null) {
-					File f = new File(fd.getFile());
-					if (!f.exists()) {
-						try {
-							f.createNewFile();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+				if (filePath != null) {
+					File f = new File(filePath);
+					System.out.println(f.getAbsolutePath());
+					try {
+						// Only created if it doesn't exist already
+						f.createNewFile();
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
 					
 					db = new Database();
