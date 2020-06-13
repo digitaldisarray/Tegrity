@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -65,6 +66,16 @@ public class Database {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public List<DBFile> compare() {
+		List<DBFile> changed = new ArrayList<>();
+		
+		for(DBFile f : files) 
+			if(!f.getMD5().equals(HashingUtils.getMD5(new File(f.getPath()))))
+				changed.add(f);
+		
+		return changed;
 	}
 	
 

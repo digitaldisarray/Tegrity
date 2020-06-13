@@ -92,6 +92,11 @@ public class Standalone implements Runnable {
 		chckbxHideUnchanged.setFont(new Font("DialogInput", Font.PLAIN, 12));
 
 		JButton btnCompare = new JButton("Compare");
+		btnCompare.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnCompare.setEnabled(false);
 		btnCompare.setFont(new Font("DialogInput", Font.PLAIN, 12));
 
