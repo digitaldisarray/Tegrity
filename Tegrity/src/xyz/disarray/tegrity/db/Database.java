@@ -47,18 +47,18 @@ public class Database {
 
 		return true;
 	}
-	
+
 	public void save() {
 		JSONArray dbArr = new JSONArray();
-		
-		for(DBFile f : files) {
+
+		for (DBFile f : files) {
 			JSONObject fileObj = new JSONObject();
 			fileObj.put("path", f.getPath());
 			fileObj.put("md5", f.getMD5());
 			fileObj.put("sha1", f.getSha1());
 			dbArr.add(fileObj);
 		}
-		
+
 		try {
 			FileWriter file = new FileWriter(databaseFile.getAbsolutePath());
 			file.write(dbArr.toJSONString());
@@ -67,22 +67,28 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
-	
-	public List<DBFile> compare() {
-		List<DBFile> changed = new ArrayList<>();
-		
-		for(DBFile f : files) 
-			if(!f.getMD5().equals(HashingUtils.getMD5(new File(f.getPath()))))
-				changed.add(f);
-		
+
+	public List<String> compare() {
+		List<String> changed = new ArrayList<>();
+
+		for (DBFile f : files) {
+			if (!new File(f.getPath()).exists()) {
+				changed.add(f.getPath());
+				changed.add("File Not Found");
+			} else if (!f.getMD5().equals(HashingUtils.getMD5(new File(f.getPath())))) {
+				changed.add(f.getPath());
+				changed.add(f.getSha1() + ":" + f.getMD5());
+				System.out.println("Different: " + f.getPath());
+			}
+		}
+
 		return changed;
 	}
-	
 
 	public void addFile(File file) {
 		files.add(new DBFile(file.getAbsolutePath(), HashingUtils.getMD5(file), HashingUtils.getSHA1(file)));
 	}
-	
+
 	public void removeFile(int index) {
 		files.remove(index);
 	}

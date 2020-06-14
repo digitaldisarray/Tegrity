@@ -29,6 +29,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import xyz.disarray.Launcher;
+import xyz.disarray.tegrity.db.DBFile;
 import xyz.disarray.tegrity.db.Database;
 
 public class Standalone implements Runnable {
@@ -94,6 +95,7 @@ public class Standalone implements Runnable {
 		JButton btnCompare = new JButton("Compare");
 		btnCompare.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				List<String> changedFiles = db.compare();
 				
 			}
 		});
