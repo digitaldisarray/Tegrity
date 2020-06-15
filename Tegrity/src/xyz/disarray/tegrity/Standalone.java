@@ -1,5 +1,7 @@
 package xyz.disarray.tegrity;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.FileDialog;
 import java.awt.Font;
 import java.awt.datatransfer.DataFlavor;
@@ -12,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -23,13 +26,12 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
-import javax.swing.TransferHandler;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.TransferHandler;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import xyz.disarray.Launcher;
-import xyz.disarray.tegrity.db.DBFile;
 import xyz.disarray.tegrity.db.Database;
 
 public class Standalone implements Runnable {
@@ -40,6 +42,31 @@ public class Standalone implements Runnable {
 
 	public void run() {
 		frame.setVisible(true);
+		
+		// TODO: Change this to display info after compare is run
+		list.setCellRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList list, Object value, int index,
+                      boolean isSelected, boolean cellHasFocus) {
+                 Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                 if (value instanceof File) {
+                	  File f = (File) value;
+                      setText(f.getAbsolutePath());
+                      if (f.exists()) {
+                           setBackground(Color.GREEN);
+                      } else {
+                           setBackground(Color.RED);
+                      }
+                      if (isSelected) {
+                           setBackground(getBackground().darker());
+                      }
+                 } else {
+                      setText("whodat?");
+                 }
+                 return c;
+            }
+
+       });
 	}
 
 	/**
